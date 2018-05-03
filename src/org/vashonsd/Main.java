@@ -9,22 +9,20 @@ public class Main {
 
     private static final String quitWord = "quit";
     private static Minigame currentGame;
-    private static MinigameFactory factory;
 
     public static void main(String[] args) {
-        factory = new MinigameFactory();
         Scanner in = new Scanner(System.in);
         String userIn = "";
         while(userIn != quitWord) {
             if (currentGame == null) {
-                System.out.println(factory.listGames());
+                System.out.println(MinigameFactory.listGames());
                 System.out.println("Type the name of the game you would like to play: ");
                 userIn = in.nextLine();
                 if(userIn.equalsIgnoreCase(quitWord)) break;
-                if(!factory.hasGame(userIn)) {
+                if(!MinigameFactory.hasGame(userIn)) {
                     System.out.println("Try again.");
                 } else {
-                    currentGame = factory.getGame(userIn);
+                    currentGame = MinigameFactory.getGame(userIn);
                     System.out.println(currentGame.start());
                     userIn = in.nextLine();
                 }
@@ -37,5 +35,6 @@ public class Main {
             }
         }
         System.out.println("Goodbye!");
+        in.close();
     }
 }

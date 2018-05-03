@@ -19,27 +19,10 @@ import java.util.Map;
  */
 public class MinigameFactory {
 
-    private Map<String, Minigame> games;
+    private static Map<String, Minigame> games;
 
-    public String listGames() {
-        String result = "";
-        String spacer = "";
-        for(Minigame m : games.values()) {
-            result += spacer + m.getName() + " - " + m.getDescription();
-            spacer = "\n";
-        }
-        return result;
-    }
 
-    public Minigame getGame(String s) {
-        return games.get(s);
-    }
-
-    public boolean hasGame(String s) {
-        return games.containsKey(s);
-    }
-
-    public MinigameFactory() {
+    static {
         games = new HashMap<String, Minigame>();
         addGame(new TwentyQuestions());
         addGame(new AngelicaGame());
@@ -53,7 +36,27 @@ public class MinigameFactory {
         addGame(new NabilGame());
     }
 
-    public void addGame(Minigame m) {
+    public static void addGame(Minigame m) {
         games.put(m.getName(), m);
     }
+
+    public static String listGames() {
+        String result = "";
+        String spacer = "";
+        for(Minigame m : games.values()) {
+            result += spacer + m.getName() + " - " + m.getDescription();
+            spacer = "\n";
+        }
+        return result;
+    }
+
+    public static Minigame getGame(String s) {
+        return games.get(s);
+    }
+
+    public static boolean hasGame(String s) {
+        return games.containsKey(s);
+    }
+
+
 }
