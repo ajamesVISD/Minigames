@@ -9,6 +9,7 @@ import org.vashonsd.Games.NE.NoahGame;
 import org.vashonsd.Games.RI.RobertGame;
 import org.vashonsd.Games.SP.SamGame;
 import org.vashonsd.Games.SR.SeanGame;
+import org.vashonsd.Utils.DiceGame;
 import org.vashonsd.Utils.Minigame;
 
 import java.util.HashMap;
@@ -34,6 +35,7 @@ public class MinigameFactory {
         addGame(new SamGame());
         addGame(new SeanGame());
         addGame(new NabilGame());
+        addGame(new DiceGame());
     }
 
     public static void addGame(Minigame m) {

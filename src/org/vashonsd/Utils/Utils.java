@@ -1,6 +1,8 @@
 package org.vashonsd.Utils;
 
 
+import java.util.Random;
+
 public class Utils {
 
     /**
@@ -18,5 +20,10 @@ public class Utils {
             if( !Character.isDigit(s.charAt(i)) ) return false;
         }
         return true;
+    }
+
+    public static int rollDie() {
+        Random rand = new Random();
+        return rand.nextInt(5)+1;
     }
 }

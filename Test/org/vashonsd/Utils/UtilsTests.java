@@ -12,4 +12,9 @@ public class UtilsTests {
         Assert.assertTrue(Utils.IsInteger("3"));
         Assert.assertFalse(Utils.IsInteger("th4n"));
     }
+
+    @Test
+    public void testRollDie() {
+        Assert.assertTrue(true);
+    }
 }
