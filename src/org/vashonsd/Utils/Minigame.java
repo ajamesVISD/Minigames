@@ -1,7 +1,11 @@
 package org.vashonsd.Utils;
 
 /**
- * Created by andy on 5/2/18.
+ * A Minigame can be run as a text-based game that interacts with the user.
+ *
+ * The mechanics of interacting with the user are left out of this code.
+ * It uses public methods to start, to finish, and, in between, respond
+ * to Strings with Strings.
  */
 public abstract class Minigame {
     protected String name;
