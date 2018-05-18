@@ -16,7 +16,7 @@ import org.vashonsd.Utils.Minigame;
 
 
     public NoahGame() {
-        super("Noah", "A super boring game", "Quit");
+        super("Noah", "It's Rock Paper Scissors...", "Quit");
     }
 
     @Override
@@ -97,7 +97,7 @@ import org.vashonsd.Utils.Minigame;
 
         @Override
         public String quit () {
-            return "I bet you're happy you're leaving";
+            return "You probably lost to the computer lol ";
         }
 
         private void spin() {
