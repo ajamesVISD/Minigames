@@ -29,16 +29,23 @@ public class TwentyQuestions extends Minigame {
 
     @Override
     public String handle(String str) {
+        int rQuestions=20;
         if(!Utils.IsInteger(str)) {
             return "You must guess a number.";
         }
         int guess = Integer.parseInt(str);
+        if(rQuestions==0){
+            return "You lose"+quit();
+
+        }
         if(!(guess >= 1 && guess <=500)) {
             return "Your guess must be between 1 and 500.";
         } else if(guess < targetNumber) {
-            return "too small";
+            rQuestions--;
+            return "too small: you have "+rQuestions+" guesses remaining.";
         } else if(guess > targetNumber) {
-            return "too big";
+            rQuestions--;
+            return "too big: you have "+rQuestions+" guesses remaining.";
         } else {
             setUp();
             return "Congratulations! You guessed it!\nGuess another, or type " + quitWord + " to quit.";
