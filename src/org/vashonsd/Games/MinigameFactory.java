@@ -34,6 +34,7 @@ public class MinigameFactory {
         addGame(new SamGame());
         addGame(new SeanGame());
         addGame(new NabilGame());
+
     }
 
     public static void addGame(Minigame m) {
