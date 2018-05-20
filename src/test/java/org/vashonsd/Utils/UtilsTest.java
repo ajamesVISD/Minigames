@@ -90,4 +90,10 @@ public class UtilsTest {
     public void testWriteToFile() throws Exception {
 
     }
+
+    @Test
+    public void testWordIsInside() throws Exception {
+        Assert.assertTrue(Utils.wordIsInside("ability", "tail"));
+        Assert.assertFalse(Utils.wordIsInside("least","table"));
+    }
 }

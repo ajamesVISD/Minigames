@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -38,6 +39,42 @@ public class Utils {
     public static int rollDie(int max) {
         Random rand = new Random();
         return rand.nextInt(max)+1;
+    }
+
+    /**
+     * Returns true if we can find the String sub inside the String str.
+     * <p>
+     * Example: wordIsInside("ladder", "deal") -> true
+     * wordIsInside("hallway", "witch") -> false
+     */
+    public static boolean wordIsInside(String str, String sub) {
+
+        if (sub.length() > str.length() || sub.isEmpty()) {
+            return false;
+        }
+
+        else {
+
+            //Take all the characters in the "outer" word and put them in an ArrayList.
+            ArrayList<Character> outer = new ArrayList<Character>();
+            for(Character c: str.toCharArray()) {
+                outer.add(c);
+            }
+
+            //Do the same with the Characters in the inner word.
+            ArrayList<Character> inner = new ArrayList<Character>();
+            for(Character c: sub.toCharArray()) {
+                inner.add(c);
+            }
+
+
+            for (Character c : inner) {
+                if(!outer.remove(c)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /**
