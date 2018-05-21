@@ -14,6 +14,7 @@ import java.util.*;
 public class UtilsTest {
     Map<Integer, Integer> rollFrequencies;
     int dieMax;
+    List<String> testLines;
 
     @Before
     public void setUp() throws Exception {
@@ -24,6 +25,8 @@ public class UtilsTest {
             int val = rollFrequencies.containsKey(roll) ? rollFrequencies.get(roll) : 0;
             rollFrequencies.put(roll, val+1);
         }
+        testLines = new ArrayList<String>();
+        testLines.addAll(Arrays.asList(new String[] {"one", "two", "three"}));
     }
 
     @After
@@ -83,12 +86,12 @@ public class UtilsTest {
 
     @Test
     public void testReadFromFile() throws Exception {
-
+        System.out.println(Utils.readFromFile("demo.txt"));
     }
 
     @Test
     public void testWriteToFile() throws Exception {
-
+        Utils.writeToFile(testLines, "demo.txt");
     }
 
     @Test
