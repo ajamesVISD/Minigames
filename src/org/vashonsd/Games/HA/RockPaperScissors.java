@@ -7,10 +7,11 @@ import java.util.Scanner;
 
 
 public class RockPaperScissors extends Minigame {
-    String[] random = new String[] {"R","P","S"};
+    String[] adf = new String[] {"Rock","Paper","Scissor"};
     Scanner in= new Scanner(System.in);
     String userChoice  = in.next();
-    int computerChoice = new Random().nextInt(random.length);
+    Random rand = new Random();
+    String computerChoice = adf[rand.nextInt(adf.length)];
     public RockPaperScissors() {
         super("RPS", "A simple game of rock, paper, scissors", "quit");
     }
@@ -23,12 +24,12 @@ public class RockPaperScissors extends Minigame {
     }
 
     @Override
-    public String handle(String str) {
+    public String handle(String userChoice) {
 
         if(userChoice.equalsIgnoreCase("rock")) {
-            return "you win!";
+            return "you win!"+" "+ userChoice+" "+computerChoice;
         } else {
-            return "you lose!";
+            return "you lose!"+"  "+userChoice+" "+computerChoice;
         }
     }
 

@@ -11,5 +11,6 @@ public class UtilsTests {
     public void testIsInteger(){
 //        Assert.assertTrue(Utils.IsInteger("3"));
 //        Assert.assertFalse(Utils.IsInteger("th4n"));
+
     }
 }
