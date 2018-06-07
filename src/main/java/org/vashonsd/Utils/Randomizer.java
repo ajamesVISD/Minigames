@@ -1,10 +1,15 @@
 package org.vashonsd.Utils;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Randomizer{
 
     public static Random theInstance = null;
+    private static List<String> words;
 
     public Randomizer(){
 
@@ -81,5 +86,10 @@ public class Randomizer{
         return min + (max - min) * Randomizer.nextDouble();
     }
 
-
+    public static String randomWord() throws IOException {
+        words = Utils.readFromFile("google-10000-english-usa-no-swears-medium.txt");
+        return words.get(
+                getInstance().nextInt(words.size())
+        );
+    }
 }
