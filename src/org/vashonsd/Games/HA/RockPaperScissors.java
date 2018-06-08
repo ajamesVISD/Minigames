@@ -6,30 +6,33 @@ import java.util.Scanner;
 import java.util.HashMap;
 
 public class RockPaperScissors extends Minigame {
-    String[] adf = new String[]{"Rock", "Paper", "Scissor"};
+    String[] rps = new String[]{"Rock", "Paper", "Scissor"};
     Scanner in = new Scanner(System.in);
     String userChoice = in.next();
     Random rand = new Random();
-    String computerChoice = adf[rand.nextInt(adf.length)];
+    String computerChoice = rps[rand.nextInt(rps.length)];
     HashMap<String, Integer> rpslookup = new HashMap<String, Integer>();
     int[][] WinnerTable = new int[3][3];
-    int numPlayed;
-    int userScore;
-    int computerScoer;
+    int userScore ;
+    int computerScore;
+    int finalScore;
+
 
 
     public RockPaperScissors() {
         super("RPS", "A simple game of rock, paper, scissors", "quit");
         // Rock = 0, Paper = 1, Scissors = 2
         WinnerTable[0][0] = 0;  // 0 == nobody  wins
-        WinnerTable[1][1] = 0;
-        WinnerTable[2][2] = 0;
         WinnerTable[0][1] = 2;  // 2 == second player wins
-        WinnerTable[1][0] = 1;  // 1 == first player wins
         WinnerTable[0][2] = 1;
+        WinnerTable[1][1] = 0;
+        WinnerTable[1][0] = 1;  // 1 == first player wins
         WinnerTable[1][2] = 2;
-        WinnerTable[2][0] = 2;
-        WinnerTable[2][1] = 1;
+        WinnerTable[2][0] = 1;
+        WinnerTable[2][1] = 2;
+        WinnerTable[2][2] = 0;
+
+
 
         rpslookup.put("ROCK", 0);
         rpslookup.put("PAPER", 1);
@@ -44,10 +47,8 @@ public class RockPaperScissors extends Minigame {
 
     @Override
     public String handle(String userChoice) {
-            numPlayed++;
 
-            computerChoice = adf[rand.nextInt(adf.length)];
-
+            computerChoice = rps[rand.nextInt(rps.length-1)];
             int p1 = rpslookup.get(computerChoice.toUpperCase());
             int p2;
             if (rpslookup.containsKey(userChoice.toUpperCase())) {
@@ -58,13 +59,22 @@ public class RockPaperScissors extends Minigame {
 
             int whowins = WinnerTable[p1][p2];
             if (whowins == 0) {
-                return "It's a tie!";
+
+                return "You chose "+ userChoice.toUpperCase()+","+" The computer chose "+computerChoice.toUpperCase()+". It's a tie!.";
+
+            }else if(whowins==1){
+                computerScore++;
+                finalScore++;
+                return "You chose "+ userChoice.toUpperCase()+","+" The computer chose "+computerChoice.toUpperCase()+". The computer win!.";
+            }else if(whowins==2){
+                userScore++;
+                finalScore++;
+                return "You chose "+ userChoice.toUpperCase()+","+" The computer chose "+computerChoice.toUpperCase()+". You win!.";
             }
             return "Try again!";
         }
 
-        return "";
-    }
+
     @Override
     public String quit() {
         return "Good Bye.";
