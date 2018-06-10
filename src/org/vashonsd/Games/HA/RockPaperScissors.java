@@ -47,32 +47,37 @@ public class RockPaperScissors extends Minigame {
 
     @Override
     public String handle(String userChoice) {
+        computerChoice = rps[rand.nextInt(rps.length - 1)];
+        int p1 = rpslookup.get(computerChoice.toUpperCase());
+        int p2;
+        if (rpslookup.containsKey(userChoice.toUpperCase())) {
+            p2 = rpslookup.get(userChoice.toUpperCase());
+        } else {
+            return "I don't understand " + userChoice + "; I need Rock, Paper or Scissors";
+        }
 
-            computerChoice = rps[rand.nextInt(rps.length-1)];
-            int p1 = rpslookup.get(computerChoice.toUpperCase());
-            int p2;
-            if (rpslookup.containsKey(userChoice.toUpperCase())) {
-                p2 = rpslookup.get(userChoice.toUpperCase());
-            } else {
-                return "I don't understand " + userChoice + "; I need Rock, Paper or Scissors";
-            }
-
-            int whowins = WinnerTable[p1][p2];
+        int whowins = WinnerTable[p1][p2];
+        while (finalScore < 5) {
             if (whowins == 0) {
 
-                return "You chose "+ userChoice.toUpperCase()+","+" The computer chose "+computerChoice.toUpperCase()+". It's a tie!.";
+                return "You chose " + userChoice.toUpperCase() + "," + " The computer chose " + computerChoice.toUpperCase() + ". It's a tie!. " +userScore+" - "+computerScore;
 
-            }else if(whowins==1){
+            } else if (whowins == 1) {
                 computerScore++;
                 finalScore++;
-                return "You chose "+ userChoice.toUpperCase()+","+" The computer chose "+computerChoice.toUpperCase()+". The computer win!.";
-            }else if(whowins==2){
+                return "You chose " + userChoice.toUpperCase() + "," + " The computer chose " + computerChoice.toUpperCase() + ". The computer win!. " +userScore+" - "+computerScore;
+            } else if (whowins == 2) {
                 userScore++;
                 finalScore++;
-                return "You chose "+ userChoice.toUpperCase()+","+" The computer chose "+computerChoice.toUpperCase()+". You win!.";
+                return "You chose " + userChoice.toUpperCase() + "," + " The computer chose " + computerChoice.toUpperCase() + ". You win!. " +userScore+" - "+computerScore;
             }
             return "Try again!";
         }
+        if(userScore>computerScore){
+            return "You won the game! "+userScore+" - "+computerScore;
+        }
+        return "You lost!"+userScore+" - "+computerScore;
+    }
 
 
     @Override
