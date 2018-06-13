@@ -16,7 +16,7 @@ import org.vashonsd.Utils.Minigame;
     int numRounds = 0;
     Choice userChoice;
     Choice computerChoice;
-    String winner = userChoice.determineWinner(computerChoice);
+
 
 
     public NoahGame() {
@@ -33,10 +33,6 @@ import org.vashonsd.Utils.Minigame;
     /**
      * Call this method to get the game into its initial state.
      */
-    private void setUp() {
-
-    }
-
 
     @Override
     public String handle(String str) {
@@ -99,7 +95,7 @@ import org.vashonsd.Utils.Minigame;
         //Then use a randomizer to set the computerChoice.
 
 
-
+        String winner = userChoice.determineWinner(computerChoice);
         System.out.println("\nYou picked: " + userChoice.getName() + ", The computer picked: " + computerChoice.getName() +
                 "\n\n" + winner);
         if (winner.contains("Win")) {
