@@ -32,10 +32,6 @@ public class RobertGame extends Minigame {
         return gridText;
     }
 
-    public String getQuitWord(){return quitWord;}
-
-    public String getDescription(){return description;}
-
     @Override
     public String handle(String str) {
 
