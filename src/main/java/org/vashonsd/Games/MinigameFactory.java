@@ -26,8 +26,8 @@ public class MinigameFactory {
 
     static {
         games = new HashMap<String, Minigame>();
-        addGame(new TwentyQuestions());
-        addGame(new AngelicaGame());
+       addGame(new TwentyQuestions());
+       addGame(new AngelicaGame());
         addGame(new BeckettGame());
         addGame(new EmmeGame());
         addGame(new HuthaifaGame());
@@ -38,7 +38,6 @@ public class MinigameFactory {
         addGame(new NabilGame());
         addGame(new DiceGame());
         addGame(new RockPaperPlus());
-        addGame(new PersonalityGame());
     }
 
     public static void addGame(Minigame m) {
