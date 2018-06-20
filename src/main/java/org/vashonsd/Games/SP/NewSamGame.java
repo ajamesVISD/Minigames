@@ -1,18 +1,16 @@
 package org.vashonsd.Games.SP;
-import org.vashonsd.Utils.Cards.Card;
+
 import org.vashonsd.Utils.Cards.Deck;
 import org.vashonsd.Utils.Cards.Hand;
 import org.vashonsd.Utils.Minigame;
 import org.vashonsd.Utils.Utils;
 
-import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 /**
  * Created by andy on 5/2/18.
  */
-public class SamGame extends Minigame {
+public class NewSamGame extends Minigame {
 
     private Player human;
     private Player computer;
@@ -22,7 +20,7 @@ public class SamGame extends Minigame {
     private int currentBet;
     private boolean betSet;
 
-    public SamGame() {
+    public NewSamGame() {
         super("Blackjack", "A betting game, kind of, it sucks", "quit");
         human = new Player();
         computer = new Player();
