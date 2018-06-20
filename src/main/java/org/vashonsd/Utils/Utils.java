@@ -92,6 +92,12 @@ public class Utils {
         lines = Files.readAllLines(path, StandardCharsets.UTF_8);
         return lines;
     }
+    //Just a little random number method I wrote to make a part of my code cleaner
+    public static int newRand(int bound) {
+        Random set = new Random();
+        int ret = set.nextInt(bound );
+        return ret;
+    }
 
     public static void writeToFile(List<String> strings, String filename) throws IOException {
         Path path = Paths.get(pathPrefix + filename);
