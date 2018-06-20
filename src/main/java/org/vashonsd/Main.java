@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class Main {
 
+
     private static final String quitWord = "quit";
     private static Minigame currentGame;
 
