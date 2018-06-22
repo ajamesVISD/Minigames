@@ -2,13 +2,12 @@ package org.vashonsd.Utils;
 
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Utils {
 
@@ -92,6 +91,12 @@ public class Utils {
         lines = Files.readAllLines(path, StandardCharsets.UTF_8);
         return lines;
     }
+    //Just a little random number method I wrote to make a part of my code cleaner
+    public static int newRand(int bound) {
+        Random set = new Random();
+        int ret = set.nextInt(bound );
+        return ret;
+    }
 
     public static void writeToFile(List<String> strings, String filename) throws IOException {
         Path path = Paths.get(pathPrefix + filename);
@@ -103,5 +108,37 @@ public class Utils {
         List<String> previousLines = readFromFile(filename);
         previousLines.addAll(strings);
         writeToFile(previousLines, filename);
+    }
+
+//_______________________________________________________________________________________________________
+
+// Loops through the string and checks if the letter exists in the string
+    public static boolean letterIsInWord(String goalWord,
+                                      String guessedLetter) {
+        char c = guessedLetter.charAt(0);
+        for (int i = 0; i < goalWord.length(); i++) {
+            if(c == goalWord.charAt(i)) {
+                return true;
+            }
+        }
+        return false;
+    }
+//shows all the indexes of a word where a letter exists
+    public static int[] allIndexesOf(String word, char search){
+        ArrayList<Integer> indexesOfString = new ArrayList<Integer>();
+        for(int i = 0; i<word.length(); i++) {
+            if (word.charAt(i) == search) {
+                indexesOfString.add(i);
+            }
+        }
+        //Convert ArrayList to array
+//        System.out.println(indexesOfString);
+        int[] result = new int[indexesOfString.size()];
+        for (int i=0; i<indexesOfString.size(); i++) {
+            result[i] = indexesOfString.get(i);
+        }
+//        String test = Arrays.toString(result);
+//        return test;
+        return result;
     }
 }
