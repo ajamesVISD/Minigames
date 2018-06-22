@@ -1,206 +1,170 @@
 package org.vashonsd.Games.SR;
 
 import org.vashonsd.Utils.Minigame;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import org.vashonsd.Utils.Utils;
 
 
 /**
  * Created by andy on 5/2/18.
  */
 public class SeanGame extends Minigame {
-    String[] spaces;
-    List<String> spacesCopy;
-    boolean compWin;
-    boolean userWin;
-    String[] fThree;
-    String[] sThree;
-    String[] lThree;
+    Board toeBoard;
 
     public SeanGame() {
-        super("Sean","like tic tac toe but worse","quit");
-        spaces=new String[9];
-        fThree=new String[3];
-        sThree=new String[3];
-        lThree=new String[3];
+        super("Sean", "like tic tac toe but worse", "quit");
     }
 
     @Override
     public String start() {
         setUp();
-        return "each position on the tic tac board has a number from zero to eight; type the number you want to play"+
-                "\n1|2|3"+
-                "\n4|5|6"+
-                "\n7|8|9";
+        return "each position on the tic tac board has an x and y coordinate from 0 to 2 where the upper left is 0; type them in the format x,y" +
+                "\n0|1|2" +
+                "\n1| | " +
+                "\n2| | ";
     }
+
+    //Sets array used for storing player and computer game moves to inital values
     public void setUp() {
-        for (int i = 0; i < 9; i++) {
-            spaces[i] = "0";
-        }
-        spacesCopy = Arrays.asList(spaces);
-        setReturns();
+        toeBoard = new Board();
     }
 
-    public void setReturns(){
-        for (int i = 0; i < 3; i++) {
-            fThree[i] = spaces[i];
-        }
 
-        sThree[0] = spaces[3];
-        sThree[1] = spaces[4];
-        sThree[2] = spaces[5];
-        lThree[0] = spaces[6];
-        lThree[1] = spaces[7];
-        lThree[2] = spaces[8];
-    }
-
-    public void userWin(){
-        if(spaces[0].equals("x")){
-            if(spaces[2].equals("x")&&spaces[1].equals("x")){
-                userWin=true;
-            }
-            else if(spaces[3].equals("x")&&spaces[6].equals("x")){
-                userWin=true;
-            }
-            else if(spaces[5].equals("x")&&spaces[8].equals("x")){
-                userWin=true;
-            }
-
-        }
-        else if(spaces[8].equals("x")){
-            if(spaces[6].equals("x")&&spaces[7].equals("x")){
-                userWin=true;
-            }
-            else if(spaces[2].equals("x")&&spaces[5].equals("x")){
-                userWin=true;
-            }
-
-        }
-        if(spaces[4].equals("x")){
-            if(spaces[6].equals("x")&&spaces[2].equals("x")){
-                userWin=true;
-            }
-        }
-        else{
-            userWin=false;
-        }
-
-    }
-
-    public void compWin(){
-        if(spaces[0].equals("o")){
-            if(spaces[2].equals("o")&&spaces[1].equals("o")){
-                compWin=true;
-            }
-            else if(spaces[3].equals("o")&&spaces[0].equals("o")){
-                compWin=true;
-            }
-            else if(spaces[5].equals("o")&&spaces[8].equals("o")){
-                compWin=true;
-            }
-
-        }
-        else if(spaces[8].equals("o")){
-            if(spaces[6].equals("o")&&spaces[7].equals("o")){
-                compWin=true;
-            }
-            else if(spaces[2].equals("o")&&spaces[5].equals("o")){
-                compWin=true;
-            }
-
-        }
-        else if(spaces[4].equals("o")){
-            if(spaces[6].equals("o")&&spaces[2].equals("o")){
-                compWin=true;
-            }
-        }
-        else{
-            compWin=false;
-        }
-
-    }
-
+    //    //Handle method which interacts with the user in the game.
+    //handle parses the users string into into x and y cordinates and sets the space to them
     @Override
     public String handle(String str) {
-        int place =10;
+        int x;
+        int y;
+        //parse the input.
         try {
-            place = Integer.parseInt(str);
+            if (str.length() == 3) {
+                String b = str.substring(0, 1);
+                String d = str.substring(2, 3);
+                y = Integer.parseInt(b);
+                x = Integer.parseInt(d);
+                if (x < 3 && y < 3 && toeBoard.getSpace(x, y).getValue() == State.EMPTY) {
+                    toeBoard.setSpace(x, y, State.X);
+                } else {
+                    return "you cannot play there";
+                }
+            } else {
+                return "you cant play there";
+            }
+        } catch (NumberFormatException nfe) {
+            return "your number is to formatted in x,y";
         }
-        catch(NumberFormatException nfe ){}
-
-
-        if(place<9&&(!spaces[place].equals("x"))&&(!spaces[place].equals("o"))){
-            spaces[place]="x";
-        }
-        else{
-            return "You cannot play there";
-        }
-        compWin();
-        userWin();
-        compProcess();
-        if(compWin==true) {
-
-            return detWinner();
-        }
-        else if(userWin==true){
-            return detWinner();
-        }
-        else if(catsGame()){
-            return detWinner();
-        }
-        spacesCopy = Arrays.asList(spaces);
-        setReturns();
-        return  spacesCopy.toString();
-
-
+        return detWinner();
     }
 
-    public boolean catsGame(){
-        if(spacesCopy.contains("0")){
-            return false;
+    //
+//
+//    //method that decides where the computer plays, uses a random number unless the computer can block a move or play to win
+    public void compProcess() {
+       toeBoard.setGroupings();
+               int comp = Utils.newRand(2);
+               int comp2 = Utils.newRand(2);
+               if(!win()) {
+                   if(!block()){
+                       if(!makeTwo()) {
+                           if (toeBoard.getSpace(comp, comp2).getValue() == State.EMPTY) {
+                               toeBoard.setSpace(comp, comp2, State.O);
+                           } else if (toeBoard.tie() || toeBoard.xWins() || toeBoard.yWins()) {
+                               quit();
+                           } else {
+                               compProcess();
+                           }
+                       }
+                   }
+               }
+
+    }
+    // determines if the computer can make a move to win by looping through paths and playing if the computer has 2 o's in one path
+    public boolean win(){
+        toeBoard.setGroupings();
+        for(int i=0;i<8;i++){
+            if(toeBoard.paths[i].getNumY()==2){
+                for(int x=0;x<3;x++){
+                    if(toeBoard.paths[i].getSpaceAt(x).containsValue(State.EMPTY)){
+                        int z= toeBoard.paths[i].getSpaceAt(x).getNumber();
+                        toeBoard.setSpace(z,State.O);
+                        return true;
+                    }
+                }
+            }
+            if(i==8){
+                return false;
+            }
         }
-        else{
-            return true;
-        }
+        return false;
     }
 
-    public void compProcess(){
-        Random rand = new Random();
-        int comp = rand.nextInt(8) + 1;
-        int i=0;
-        if(spaces[comp]=="0") {
-            spaces[comp] = "o";
-            i++;
+    //Makes a row of two for the computer
+    public boolean makeTwo(){
+        toeBoard.setGroupings();
+        for(int i=0;i<8;i++){
+            if(toeBoard.paths[i].getNumY()==1){
+                for(int x=0;x<3;x++){
+                    if(toeBoard.paths[i].getSpaceAt(x).containsValue(State.EMPTY)){
+                        int z= toeBoard.paths[i].getSpaceAt(x).getNumber();
+                        toeBoard.setSpace(z,State.O);
+                        return true;
+                    }
+                }
+            }
+            if(i==8){
+                return false;
+            }
         }
-        else if(catsGame()){
+        return false;
+    }
+
+    //determines if the computer can block a play to win by the user, by looping through paths to see if the opponent has two in a path
+    public boolean block(){
+        toeBoard.setGroupings();
+        for(int i=0;i<8;i++){
+            if(toeBoard.paths[i].getNumX()==2){
+                for(int x=0;x<3;x++){
+                    if(toeBoard.paths[i].getSpaceAt(x).containsValue(State.EMPTY)){
+                        int z= toeBoard.paths[i].getSpaceAt(x).getNumber();
+                        toeBoard.setSpace(z,State.O);
+                        return true;
+                    }
+                }
+            }
+            if(i==8){
+                return false;
+            }
         }
-        else {
+        return false;
+    }
+
+
+
+    //determines who has won by checking
+    //also runs the compProcess method if the game is still going and prints out the board.
+    public String detWinner() {
+        if(!toeBoard.tie()&&!toeBoard.xWins()&&!toeBoard.yWins()) {
             compProcess();
         }
-
-
-    }
-
-    public String detWinner(){
-        if(userWin){
-            return "you win";
-        }
-        else if(compWin){
-            return "you loose";
-        }
-        else if(catsGame()){
+        if (toeBoard.xWins()) {
+            return "You win!";
+        } else if (toeBoard.yWins()) {
+            return "You lose";
+        }else if(toeBoard.tie()){
             return "tie";
         }
         else {
-            return "aight fam";
+            return toeBoard.toString();
         }
     }
+
     @Override
     public String quit() {
 
         return "adios";
 
     }
+
+
 }
+

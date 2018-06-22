@@ -4,13 +4,13 @@ import org.vashonsd.Games.AO.AngelicaGame;
 import org.vashonsd.Games.BR.BeckettGame;
 import org.vashonsd.Games.EO.EmmeGame;
 import org.vashonsd.Games.HA.HuthaifaGame;
+import org.vashonsd.Games.HA.RockPaperScissors;
 import org.vashonsd.Games.NA.NabilGame;
-import org.vashonsd.Games.NE.NoahGame;
+//import org.vashonsd.Games.NE.NoahGame;
 import org.vashonsd.Games.RI.RobertGame;
 import org.vashonsd.Games.RPS_games.RockPaperPlus;
 import org.vashonsd.Games.SP.SamGame;
 import org.vashonsd.Games.SR.SeanGame;
-import org.vashonsd.Utils.DiceGame;
 import org.vashonsd.Utils.Minigame;
 
 import java.util.HashMap;
@@ -29,16 +29,15 @@ public class MinigameFactory {
         addGame(new TwentyQuestions());
         addGame(new AngelicaGame());
         addGame(new BeckettGame());
-        addGame(new EmmeGame());
-        addGame(new HuthaifaGame());
-        addGame(new NoahGame());
-        addGame(new RobertGame());
+//        addGame(new EmmeGame());
+//        addGame(new HuthaifaGame());
+//        addGame(new NoahGame());
+//        addGame(new RobertGame());
         addGame(new SamGame());
-        addGame(new SeanGame());
+       addGame(new SeanGame());
         addGame(new NabilGame());
         addGame(new DiceGame());
         addGame(new RockPaperPlus());
-        addGame(new PersonalityGame());
     }
 
     public static void addGame(Minigame m) {
