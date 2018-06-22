@@ -13,7 +13,7 @@ public class TwentyQuestions extends Minigame {
     private int targetNumber;
 
     public TwentyQuestions() {
-        super("20Q", "Guess a number between 0 and 1,000", "quit");
+        super("20q", "Guess a number between 0 and 1,000", "quit");
     }
 
     @Override

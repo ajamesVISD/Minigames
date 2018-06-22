@@ -3,19 +3,22 @@ package org.vashonsd;
 import org.vashonsd.Utils.Minigame;
 import org.vashonsd.Games.MinigameFactory;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
 
 public class Main {
 
+
     private static final String quitWord = "quit";
     private static Minigame currentGame;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalAccessException, InstantiationException {
         Scanner in = new Scanner(System.in);
         String userIn = "";
         while(userIn != quitWord) {
             if (currentGame == null) {
                 System.out.println(MinigameFactory.listGames());
+
                 System.out.println("Type the name of the game you would like to play: ");
                 userIn = in.nextLine();
                 if(userIn.equalsIgnoreCase(quitWord)) break;

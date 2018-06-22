@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Randomizer{
 
@@ -91,5 +93,13 @@ public class Randomizer{
         return words.get(
                 getInstance().nextInt(words.size())
         );
+    }
+
+    public static String randomWord(int n) throws IOException {
+        words = Utils.readFromFile("google-10000-english-usa-no-swears-medium.txt");
+        List<String> wordList = words.stream()
+                .filter(x -> x.length() >= n)
+                .collect(Collectors.toList());
+        return wordList.get(getInstance().nextInt(wordList.size()));
     }
 }
