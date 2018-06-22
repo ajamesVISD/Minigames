@@ -6,13 +6,13 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class SamGameTest {
+public class NewSamGameTest {
 
-    SamGame game;
+    NewSamGame game;
 
     @Before
     public void setUp() throws Exception {
-        game = new SamGame();
+        game = new NewSamGame();
     }
 
     @After

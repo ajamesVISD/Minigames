@@ -9,7 +9,7 @@ import org.vashonsd.Games.NA.NabilGame;
 //import org.vashonsd.Games.NE.NoahGame;
 import org.vashonsd.Games.RI.RobertGame;
 import org.vashonsd.Games.RPS_games.RockPaperPlus;
-import org.vashonsd.Games.SP.SamGame;
+import org.vashonsd.Games.SP.NewSamGame;
 import org.vashonsd.Games.SR.SeanGame;
 import org.vashonsd.Utils.Minigame;
 
@@ -30,13 +30,12 @@ public class MinigameFactory {
         addGame(new AngelicaGame());
         addGame(new BeckettGame());
 //        addGame(new EmmeGame());
-//        addGame(new HuthaifaGame());
+        addGame(new RockPaperScissors());
 //        addGame(new NoahGame());
 //        addGame(new RobertGame());
-        addGame(new SamGame());
-       addGame(new SeanGame());
+        addGame(new NewSamGame());
+        addGame(new SeanGame());
         addGame(new NabilGame());
-        addGame(new DiceGame());
         addGame(new RockPaperPlus());
     }
 
@@ -47,7 +46,7 @@ public class MinigameFactory {
     public static String listGames() {
         String result = "";
         String spacer = "";
-        for(Minigame m : games.values()) {
+        for (Minigame m : games.values()) {
             result += spacer + m.getName() + " - " + m.getDescription();
             spacer = "\n";
         }

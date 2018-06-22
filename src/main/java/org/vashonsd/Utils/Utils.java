@@ -1,7 +1,9 @@
 package org.vashonsd.Utils;
 
+import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -86,10 +88,8 @@ public class Utils {
      */
     public static List<String> readFromFile(String filename) throws IOException {
 
-        List<String> lines;
-        Path path = Paths.get(pathPrefix + filename);
-        lines = Files.readAllLines(path, StandardCharsets.UTF_8);
-        return lines;
+        InputStream is = Utils.class.getClassLoader().getResourceAsStream(filename);
+        return IOUtils.readLines(is);
     }
     //Just a little random number method I wrote to make a part of my code cleaner
     public static int newRand(int bound) {

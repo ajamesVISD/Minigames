@@ -41,7 +41,7 @@ public class BeckettGame extends Minigame {
             //The guess was correct!
             if (currentRound.isInWord(guess)) {
                 if(currentRound.playerHasWon()){
-                    System.out.println(currentRound.getStatus());
+//                    System.out.println(currentRound.getStatus());
                     setUp();
                     return "You guessed it all right! " +
                             "I have chosen a new word for you: "
