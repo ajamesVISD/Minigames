@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class can be used to record what letters have been guessed, or eliminated, or anything else.
+ */
 public class LetterStore {
 
     Map<Character, Boolean> store;
@@ -27,10 +30,8 @@ public class LetterStore {
     public boolean getStatus(char c) {
         return store.get(c);
     }
-
     /**
      * Returns a List of all the characters that are marked true.
-     *
      * @return A List of Characters.
      */
     public List<Character> getTrueValues() {
@@ -43,6 +44,9 @@ public class LetterStore {
         return result;
     }
 
+    public int getSize(){
+        return store.size();
+    }
     @Override
     public String toString() {
         return "LetterStore{" +
