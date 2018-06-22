@@ -12,7 +12,7 @@ public class RockPaperPlus extends Minigame {
     Choice computerChoice;
 
     public RockPaperPlus() {
-        super("RPS", "A basic rock, paper, scissors game.", "quit");
+        super("Rock", "A basic rock, paper, scissors game.", "quit");
         setComputerChoice();
     }
 
