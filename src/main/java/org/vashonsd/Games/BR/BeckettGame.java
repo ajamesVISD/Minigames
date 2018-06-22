@@ -3,66 +3,63 @@ package org.vashonsd.Games.BR;
 import org.vashonsd.Utils.Minigame;
 import org.vashonsd.Utils.Utils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 /**
  * Created by andy on 5/2/18.
  */
 public class BeckettGame extends Minigame {
-    //the letters the user guesses
-    private String hangLetters;
-    // Word that is being guessed letter by letter
-    private String hangWord;
-    // The amount of guesses someone has based on the hangWord's length
-    private int guessesLeft;
-    // A list full of the guesses letters
-    private List<String>guessedLetters;
-    // A list of the guessed letters that match the string
-    private List<String>correctLetters;
 
+    Round currentRound;
 
     public BeckettGame() {
-        super("Hangman", "A game where you save a life", "quit");
-        guessedLetters = new ArrayList<String>();
-        correctLetters = new ArrayList<String>();
-
+        super("Hangman", "Its like hangman but isn't", "quit");
+        setUp();
     }
+
     public String start(){
         setUp();
-        return "Thank you for choosing HANGMAN ... produced by Beckett \n...Guess a letter";
+        return "The first word is " + currentRound.getScreenedWord();
     }
 
     private void setUp(){
-        hangWord = "word";
-        guessesLeft = hangWord.length();
+        currentRound = new Round();
     }
 
-
-    public String handle(String str){
-        if(str.length() > 1 || str.length() < 1) {
-            return "You lose, you didn't guess a single letter. Play again!";
+    public String handle(String str) {
+        if(str.length() > 1) {
+            return "please supply one letter only.";
         }
         if(Utils.IsInteger(str)){
-            return "You gotta guess a letter, not a number. Play again!";
+            return "please give me a letter, not a number. This is Hangman stupid!";
         }
-        if(str.equalsIgnoreCase(hangLetters)){
-            return "Right";
-        }
-        if(!str.equalsIgnoreCase(hangLetters)){
-            guessedLetters.add(str);
-            if(guessesLeft == 0){
-                return "You ran out of guesses, type " + quitWord + " now";
+
+        char guess = str.charAt(0);
+        if(currentRound.lettersGuessed.getStatus(guess)) {
+            return "you already guessed that, guess another letter";
+        } else {
+            currentRound.handleGuess(guess);
+            //The guess was correct!
+            if (currentRound.isInWord(guess)) {
+                if(currentRound.playerHasWon()){
+                    System.out.println(currentRound.getStatus());
+                    setUp();
+                    return "You guessed it all right! " +
+                            "I have chosen a new word for you: "
+                            + currentRound.getStatus();
+                } else {
+                    return "Yes, " + guess + " is in the word!\n" + currentRound.getStatus();
+                }
+                //The guess was incorrect!
+            } else {
+                currentRound.guesses--;
+                if(currentRound.getGuesses()==0){
+                    return "You ran out of guesses, type quit now!";
+                } else {
+                    return "try again... thats wrong!\nYou have " + currentRound.getGuesses() + " guesses left";
+                }
             }
-            guessesLeft--;
-            return "Wrong, guess again... you have " + guessesLeft + " left " + guessedLetters;
-        }
-        else{
-            return "congrats";
         }
     }
-
 
     public String quit(){
         return "You ended the game";
