@@ -19,8 +19,9 @@ import org.vashonsd.Utils.Minigame;
 
 
 
+
     public NoahGame() {
-        super("Noah", "It's Rock Paper Scissors...", "Quit");
+        super("Noah", "It's Rock Paper Scissors...", "quit");
     }
 
     @Override

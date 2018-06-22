@@ -53,6 +53,9 @@ public abstract class Minigame {
      */
     public abstract String handle(String str);
 
+    //    //Handle method which interacts with the user in the game.
+
+
     /**
      * This method will be called with the user signals a quit.
      *

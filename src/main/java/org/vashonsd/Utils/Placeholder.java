@@ -3,7 +3,7 @@ package org.vashonsd.Utils;
 /**
  * Created by andy on 5/2/18.
  */
-public class Placeholder extends Minigame {
+public abstract class Placeholder extends Minigame {
 
 
     public Placeholder(String name) {
