@@ -1,14 +1,14 @@
 package org.vashonsd.Games.HA;
 
 import org.vashonsd.Utils.Minigame;
+
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.HashMap;
 
 public class RockPaperScissors extends Minigame {
-    String[] rps = new String[]{"Rock", "Paper", "Scissor"};
-    Scanner in = new Scanner(System.in);
-    String userChoice = in.next();
+    final String[] rps = new String[]{"Rock", "Paper", "Scissor"};
     Random rand = new Random();
     String computerChoice = rps[rand.nextInt(rps.length)];
     HashMap<String, Integer> rpslookup = new HashMap<String, Integer>();
