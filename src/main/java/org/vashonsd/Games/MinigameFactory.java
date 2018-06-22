@@ -34,9 +34,9 @@ public class MinigameFactory {
 //        addGame(new NoahGame());
 //        addGame(new RobertGame());
         addGame(new SamGame());
-        addGame(new SeanGame());
-//        addGame(new NabilGame());
-        addGame(new RockPaperScissors());
+       addGame(new SeanGame());
+        addGame(new NabilGame());
+        addGame(new DiceGame());
         addGame(new RockPaperPlus());
     }
 
